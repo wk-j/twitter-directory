@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Twitter {
+namespace Twitter1 {
     /// <summary>
     /// Simple class for sending tweets to Twitter using Single-user OAuth.
     /// https://dev.twitter.com/oauth/overview/single-user

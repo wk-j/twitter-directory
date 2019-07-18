@@ -1,0 +1,2 @@
+GET https://api.twitter.com/1.1/account/verify_credentials.json
+Authorization: Bearer AAAAAAAAAAAAAAAAAAAAADBlUwAAAAAA0puD1aWtH8rAusVEBkCBd6jWrqA%3DCar2zMdyEnDaudMIatTZ5gcfq7wTk7zmU9LIlNLTYor1G0V3H1

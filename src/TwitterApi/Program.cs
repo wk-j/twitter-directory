@@ -7,13 +7,12 @@ namespace Twitter {
         static async Task Main(string[] args) {
             var consumerKey = "";
             var consumerKeySecret = "";
-            var accessToken = "";
-            var accessTokenSecret = "";
+            var twitter = new Twitter2.Twitter(consumerKey, consumerKeySecret);
+            var bearer = twitter.BearerToken;
 
-            var twitter = new TwitterApi(consumerKey, consumerKeySecret, accessToken, accessTokenSecret);
-            var rs = await twitter.Tweet("Test Twitter API");
+            Console.WriteLine(bearer);
 
-            Console.WriteLine(rs);
+
         }
     }
 }
