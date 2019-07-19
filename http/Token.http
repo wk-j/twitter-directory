@@ -1,7 +1,2 @@
-POST  https://api.twitter.com/oauth/request_token
-User-Agent: themattharris HTTP Client
-Accept: */*
-Authorization: OAuth oauth_callback="http%3A%2F%2Flocalhost%3A8080%2Fjw%2Fweb%2Fjson%2Fplugin%2Forg.joget.twitter.TwitterSecurity%2Fservice", oauth_consumer_key="nvQvzjkVQYagpijRzZIsQ", oauth_nonce="{{$guid}}", oauth_signature="r3xtESAVMZu4uHDDDOKEbXew3RX1cvL2k7lsgZoOE", oauth_signature_method="HMAC-SHA1", oauth_timestamp="{{$timestamp}}", oauth_version="1.0"
-
-
-https://edoc.ku.ac.th/index.html
+POST https://api.twitter.com/oauth/request_token
+Authorization: OAuth oauth_nonce="1", oauth_callback="http%3A%2F%2Fmyapp.com%3A3005%2Ftwitter%2Fprocess_callback", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${{$timestamp}}", oauth_consumer_key="nvQvzjkVQYagpijRzZIsQ", oauth_signature="r3xtESAVMZu4uHDDDOKEbXew3RX1cvL2k7lsgZoOE", oauth_version="1.0"

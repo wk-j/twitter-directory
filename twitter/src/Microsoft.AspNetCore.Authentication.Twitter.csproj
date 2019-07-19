@@ -13,4 +13,8 @@
         <Reference Include="Microsoft.AspNetCore.Authentication.OAuth" />
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
 </Project>

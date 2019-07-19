@@ -7,13 +7,11 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace Microsoft.AspNetCore.Authentication.Twitter
-{
+namespace Microsoft.AspNetCore.Authentication.Twitter {
     /// <summary>
     /// Options for the Twitter authentication handler.
     /// </summary>
-    public class TwitterOptions : RemoteAuthenticationOptions
-    {
+    public class TwitterOptions : RemoteAuthenticationOptions {
         private const string DefaultStateCookieName = "__TwitterState";
 
         private CookieBuilder _stateCookieBuilder;
@@ -21,16 +19,14 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         /// <summary>
         /// Initializes a new instance of the <see cref="TwitterOptions"/> class.
         /// </summary>
-        public TwitterOptions()
-        {
+        public TwitterOptions() {
             CallbackPath = new PathString("/signin-twitter");
             BackchannelTimeout = TimeSpan.FromSeconds(60);
             Events = new TwitterEvents();
 
             ClaimActions.MapJsonKey(ClaimTypes.Email, "email", ClaimValueTypes.Email);
 
-            _stateCookieBuilder = new TwitterCookieBuilder(this)
-            {
+            _stateCookieBuilder = new TwitterCookieBuilder(this) {
                 Name = DefaultStateCookieName,
                 SecurePolicy = CookieSecurePolicy.SameAsRequest,
                 HttpOnly = true,
@@ -72,8 +68,7 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         /// <summary>
         /// Gets or sets the <see cref="TwitterEvents"/> used to handle authentication events.
         /// </summary>
-        public new TwitterEvents Events
-        {
+        public new TwitterEvents Events {
             get => (TwitterEvents)base.Events;
             set => base.Events = value;
         }
@@ -82,8 +77,7 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         /// Determines the settings used to create the state cookie before the
         /// cookie gets added to the response.
         /// </summary>
-        public CookieBuilder StateCookie
-        {
+        public CookieBuilder StateCookie {
             get => _stateCookieBuilder;
             set => _stateCookieBuilder = value ?? throw new ArgumentNullException(nameof(value));
         }
@@ -91,34 +85,27 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         /// <summary>
         /// Added the validate method to ensure that the customer key and customer secret values are not not empty for the twitter authentication middleware
         /// </summary>
-        public override void Validate()
-        {
+        public override void Validate() {
             base.Validate();
-            if (string.IsNullOrEmpty(ConsumerKey))
-            {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerKey)), nameof(ConsumerKey));
+            if (string.IsNullOrEmpty(ConsumerKey)) {
+                // throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerKey)), nameof(ConsumerKey));
             }
 
-            if (string.IsNullOrEmpty(ConsumerSecret))
-            {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerSecret)), nameof(ConsumerSecret));
+            if (string.IsNullOrEmpty(ConsumerSecret)) {
+                // throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ConsumerSecret)), nameof(ConsumerSecret));
             }
         }
 
-        private class TwitterCookieBuilder : CookieBuilder
-        {
+        private class TwitterCookieBuilder : CookieBuilder {
             private readonly TwitterOptions _twitterOptions;
 
-            public TwitterCookieBuilder(TwitterOptions twitterOptions)
-            {
+            public TwitterCookieBuilder(TwitterOptions twitterOptions) {
                 _twitterOptions = twitterOptions;
             }
 
-            public override CookieOptions Build(HttpContext context, DateTimeOffset expiresFrom)
-            {
+            public override CookieOptions Build(HttpContext context, DateTimeOffset expiresFrom) {
                 var options = base.Build(context, expiresFrom);
-                if (!Expiration.HasValue)
-                {
+                if (!Expiration.HasValue) {
                     options.Expires = expiresFrom.Add(_twitterOptions.RemoteAuthenticationTimeout);
                 }
                 return options;
